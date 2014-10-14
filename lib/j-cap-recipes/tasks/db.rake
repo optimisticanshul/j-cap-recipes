@@ -5,7 +5,8 @@ namespace :db do
     datestamp  = Time.now.strftime('%Y-%m-%d_%H-%M-%S')
 
     #create backups folder
-    backup_dir = ENV['backup-path'] || Rails.root.join('db', 'backups')
+    # backup_dir = ENV['backup-path'] || Rails.root.join('db', 'backups')
+    backup_dir = '/home/deploy/apps/backups'
     mkdir_p(backup_dir)
 
     config        = ActiveRecord::Base.connection_config
