@@ -13,10 +13,11 @@ namespace :db do
     backup_file   = File.join(backup_dir, "#{database_name}_#{datestamp}.dump")
 
     #dump the backup and zip it up
-    dump_command  = "pg_dump #{database_name} -w -F c"
-    dump_command  += " -h #{config[:hostname]}" if config[:hostname].present?
-    dump_command  += " -U #{config[:username]}" if config[:username].present?
-    dump_command  += " > #{backup_file}"
+    # dump_command  = "pg_dump #{database_name} -w -F c"
+    # dump_command  += " -h #{config[:hostname]}" if config[:hostname].present?
+    # dump_command  += " -U #{config[:username]}" if config[:username].present?
+    # dump_command  += " > #{backup_file}"
+    dump_command  = "pg_dump #{database_name} -f #{database_name}_latest.dump -i -x -O -R -S #{config[:username]}"
 
     sh dump_command
 
