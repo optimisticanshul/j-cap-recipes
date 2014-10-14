@@ -5,8 +5,7 @@ namespace :db do
     datestamp  = Time.now.strftime('%Y-%m-%d_%H-%M-%S')
 
     #create backups folder
-    # backup_dir = ENV['backup-path'] || Rails.root.join('db', 'backups')
-    backup_dir = '/home/deploy/apps/backups'
+    backup_dir = ENV['backup-path'] || Rails.root.join('db', 'backups')
     mkdir_p(backup_dir)
 
     config        = ActiveRecord::Base.connection_config
@@ -18,7 +17,7 @@ namespace :db do
     # dump_command  += " -h #{config[:hostname]}" if config[:hostname].present?
     # dump_command  += " -U #{config[:username]}" if config[:username].present?
     # dump_command  += " > #{backup_file}"
-    dump_command  = "pg_dump #{database_name} -f #{database_name}_latest.dump -i -x -O -R -S #{config[:username]}"
+    dump_command  = "pg_dump #{database_name} -f #{backup_file} -i -x -O -R -S #{config[:username]}"
 
     sh dump_command
 
